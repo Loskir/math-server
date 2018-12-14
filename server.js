@@ -47,7 +47,7 @@ router
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Math #${id}</title>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-    <style>body {margin: 0; padding:20px;display: flex;justify-content: center;align-items: center} #math {margin:0;display: inline-block}</style>
+    <style>body {margin: 0;display: flex;justify-content: center;align-items: center} #math {margin:0; padding:20px;display: inline-block}</style>
 </head>
 <body>
 <p style="font-size: 2rem" id="math">$$${data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')}$$</p>
