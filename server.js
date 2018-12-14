@@ -23,7 +23,7 @@ router
             return
         }
         let id = rangomstring.generate(5);
-        await fs.writeFile('files/'+id, ctx.request.body.data);
+        await fs.writeFile('./files/'+id, ctx.request.body.data);
         ctx.body = JSON.stringify({
             ok: true,
             id: id
@@ -114,4 +114,4 @@ app
     .use(bodyParser())
     .use(router.routes());
 
-app.listen(1001);
+app.listen(1025);
