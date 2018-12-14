@@ -15,7 +15,7 @@ module.exports = async id => {
         };
     });
     await page.setViewport(clip);
-    await page.screenshot({path: `./${id}.png`});
+    await page.screenshot({path: `./img/${id}.png`});
 
     await browser.close();
 };
