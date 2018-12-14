@@ -36,7 +36,7 @@ router
         let ua = ctx.request.header['user-agent'];
         if (ua.startsWith('TelegramBot') || ua.match('vkShare')) {
             ctx.type = 'image/png';
-            ctx.body = await fs.readFile(`./img/${id}.png`, 'utf8')
+            ctx.body = await fs.readFile(`./img/${id}.png`)
         }
         else {
             await fs.readFile('files/' + id, 'utf8')
@@ -55,6 +55,11 @@ router
                 )
                 .catch(err => ctx.body = 'Not OK')
         }
+    })
+    .get('/img/:id', async ctx => {
+        let id = ctx.path.substring(1);
+        ctx.type = 'image/png';
+        ctx.body = await fs.readFile(`./img/${id}.png`)
     });
 
 app.use(async (ctx, next) => {
