@@ -4,17 +4,17 @@ module.exports = async id => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`http://math.loskir.ru/${id}`);
-    await page.setViewport({width:10,height:10});
+    await page.setViewport({width:1000, height:1000});
     await page.waitFor('#math');
-    const dimensions = await page.evaluate(() => {
+    await page.waitFor(300);
+    const clip = await page.evaluate(() => {
+        let br = document.querySelector('#math').getBoundingClientRect();
         return {
-            width: document.querySelector('#math').scrollWidth+100,
-            height: document.querySelector('#math').scrollHeight+60,
-            deviceScaleFactor: window.devicePixelRatio
+            height: Math.round(br.height),
+            width: Math.round(br.width)
         };
     });
-    console.log(dimensions);
-    await page.setViewport(dimensions);
+    await page.setViewport(clip);
     await page.screenshot({path: `./${id}.png`});
 
     await browser.close();
