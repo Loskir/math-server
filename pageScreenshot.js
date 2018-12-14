@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-export default async id => {
+module.exports = async id => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`http://math.loskir.ru/${id}`);
