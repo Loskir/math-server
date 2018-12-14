@@ -32,7 +32,7 @@ router
     })
     .get('/:id', async ctx => {
         console.log(ctx.request.header['user-agent']);
-        let id = ctx.path.substring(1);
+        let id = ctx.params.id;
         let ua = ctx.request.header['user-agent'];
         if (ua.startsWith('TelegramBot') || ua.match('vkShare')) {
             ctx.type = 'image/png';
@@ -57,7 +57,7 @@ router
         }
     })
     .get('/img/:id', async ctx => {
-        let id = ctx.path.substring(1);
+        let id = ctx.params.id;
         ctx.type = 'image/png';
         ctx.body = await fs.readFile(`./img/${id}.png`)
     });
