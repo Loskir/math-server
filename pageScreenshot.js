@@ -7,14 +7,15 @@ module.exports = async id => {
     await page.setViewport({width:1000, height:1000});
     await page.waitFor('#math');
     await page.waitFor(300);
-    const clip = await page.evaluate(() => {
-        let br = document.querySelector('#math').getBoundingClientRect();
+    await page.emulateMedia('print');
+    let dimensions = await page.evaluate(() => {
         return {
-            height: Math.round(br.height),
-            width: Math.round(br.width)
+            height: Math.round(document.body.offsetHeight),
+            width: Math.round(document.body.offsetWidth),
+            deviceScaleFactor: window.devicePixelRatio
         };
     });
-    await page.setViewport(clip);
+    await page.setViewport(dimensions);
     await page.screenshot({path: `./img/${id}.png`});
 
     await browser.close();
