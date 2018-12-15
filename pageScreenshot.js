@@ -6,7 +6,7 @@ module.exports = async id => {
     await page.goto(`http://math.loskir.ru/${id}`);
     await page.setViewport({width:1000, height:1000});
     await page.waitFor('#math');
-    await page.waitFor(300);
+    await page.waitFor(600);
     await page.emulateMedia('print');
     let dimensions = await page.evaluate(() => {
         return {
