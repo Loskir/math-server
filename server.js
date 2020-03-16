@@ -28,6 +28,19 @@ const formError = (err) => {
 
 const getSvg = (data) => MathJax.startup.adaptor.innerHTML(MathJax.tex2svg(data, {display: true}))
 
+router.all('/generateSocial', async (ctx) => {
+  const data = ctx.request.body.data || ctx.request.query.data
+  if (!data) {
+    ctx.status = 400
+    ctx.body = JSON.stringify(formError('No data'))
+    return
+  }
+
+  const svg = getSvg(data)
+  const buffer = await getImageForSocialPreview(svg)
+  ctx.type = 'image/png'
+  ctx.body = buffer
+})
 router.all('/add', async (ctx) => {
   const data = ctx.request.body.data || ctx.request.query.data
   if (!data || data.length < 6) {
