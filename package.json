@@ -2,11 +2,13 @@
   "name": "math",
   "version": "1.2.0",
   "dependencies": {
-    "puppeteer": "^1.11.0",
-    "mz": "^2.7.0",
+    "js-yaml": "^3.13.1",
     "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "randomstring": "^1.1.5",
-    "koa-bodyparser": "^4.2.1"
+    "mathjax": "^3.0.1",
+    "mongoose": "^5.9.4",
+    "nanoid": "^2.1.11",
+    "sharp": "^0.25.1"
   }
 }

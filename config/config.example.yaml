@@ -1,0 +1,2 @@
+mongodb: 'mongodb://localhost:27017/math'
+port: 1025
