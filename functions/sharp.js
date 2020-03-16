@@ -54,7 +54,14 @@ const getImageForSocialPreview = async (svg) => {
     .then(flattenPng)
 }
 
+const pngToJpeg = (pngBuffer) => {
+  return sharp(pngBuffer)
+    .toFormat(sharp.format.jpeg)
+    .toBuffer()
+}
+
 module.exports = {
   getImageForImg,
   getImageForSocialPreview,
+  pngToJpeg,
 }

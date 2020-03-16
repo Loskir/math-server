@@ -13,6 +13,7 @@ let router = new Router()
 const {
   getImageForImg,
   getImageForSocialPreview,
+  pngToJpeg,
 } = require('./functions/sharp')
 
 const config = require('./config')
@@ -38,7 +39,8 @@ router.all('/generateSocial', async (ctx) => {
 
   const svg = getSvg(data)
   const buffer = await getImageForSocialPreview(svg)
-  ctx.type = 'image/png'
+    .then(pngToJpeg)
+  ctx.type = 'image/jpeg'
   ctx.body = buffer
 })
 router.all('/add', async (ctx) => {
