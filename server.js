@@ -2,10 +2,7 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const nanoid = require('nanoid')
 const bodyParser = require('koa-bodyparser')
-const mathjax = require('mathjax')
 const mongoose = require('mongoose')
-
-let MathJax
 
 let app = new Koa()
 let router = new Router()
@@ -27,7 +24,10 @@ const formError = (err) => {
   }
 }
 
-const getSvg = (data) => MathJax.startup.adaptor.innerHTML(MathJax.tex2svg(data, {display: true}))
+const {
+  prepareMathjax,
+  getSvg,
+} = require('./functions/mathjax')
 
 router.all('/generateSocial', async (ctx) => {
   const data = ctx.request.body.data || ctx.request.query.data
@@ -134,12 +134,7 @@ app.use(bodyParser())
 app.use(router.routes())
 
 void (async () => {
-  MathJax = await mathjax.init({
-    loader: {
-      paths: {mathjax: 'mathjax/es5'},
-      load: ['input/tex', 'output/svg'],
-    },
-  })
+  await prepareMathjax()
   await mongoose.connect(config.mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
