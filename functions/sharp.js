@@ -40,7 +40,6 @@ const getImageForSocialPreview = async (svg) => {
       if (ratio < minRatio) {
         desiredWidth = Math.round(desiredHeight * minRatio)
       }
-      console.log(width, height, desiredWidth, desiredHeight)
       return sharp(extendedPng)
         .resize({
           height: desiredHeight,
